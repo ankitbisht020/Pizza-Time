@@ -40,7 +40,7 @@ const Register = ({ activateLoginModal }) => {
     const repetitiveEmail = users.some((u) => u.email === user.email);
     const id = uuidv4();
     user.id = id;
-    console.log("request aa gyi hai ankit bhai regsiter ki!");
+    
     try {
       if (repetitiveEmail) {
         return false;
