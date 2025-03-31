@@ -25,18 +25,22 @@ const Register = ({ activateLoginModal }) => {
     try {
       const response = await fetch(USERS_URL);
       const body = await response.json();
-
-      return body.data;
+  
+      // Ensure body.data is always an array
+      return Array.isArray(body.data) ? body.data : [];
     } catch (err) {
-      console.log(err.message);
+      console.log("Error fetching users:", err.message);
+      return []; // Return an empty array instead of undefined
     }
   };
+  
 
   const createUser = async (user) => {
     const users = await getUsers();
     const repetitiveEmail = users.some((u) => u.email === user.email);
     const id = uuidv4();
     user.id = id;
+    console.log("request aa gyi hai ankit bhai regsiter ki!");
     try {
       if (repetitiveEmail) {
         return false;

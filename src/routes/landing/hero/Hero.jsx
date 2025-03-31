@@ -9,13 +9,22 @@ const Hero = () => {
   const [isLoading, setIsLoading] = useState(true);
   const videoRef = useRef(null);
 
+  // useEffect(() => {
+  //   if (videoRef.current) {
+  //     const playPromise = videoRef.current.play();
+  //     if (playPromise !== undefined) {
+  //       playPromise
+  //         .then(() => console.log("Video playing"))
+  //         .catch((error) => console.error("Autoplay blocked", error));
+  //     }
+  //   }
+  // }, []);
+
   return (
     <section
       className="homepage__hero"
       aria-labelledby="hero-title">
-      <h2
-        id="hero-title"
-        className="visually-hidden">
+      <h2 id="hero-title" className="visually-hidden">
         Welcome to Pizza Time!
       </h2>
       <video
@@ -24,19 +33,13 @@ const Hero = () => {
         loop
         muted
         playsInline
-        width="375"
         className={`hero__video ${isLoading && "loaded"}`}
-        onLoadedData={() => setIsLoading(false)}>
-        <source
-          src={HeroVideo_375}
-          type="video/mp4"
-          media="(max-width: 1024px)"
-        />
-        <source
-          src={HeroVideo}
-          type="video/mp4"
-          media="(min-width: 1025px)"
-        />
+        onLoadedData={() =>{
+         setIsLoading(false);
+         console.log("Video Loaded")
+         }}>
+        <source src={HeroVideo_375} type="video/mp4" media="(max-width: 1024px)"/>
+        <source src={HeroVideo} type="video/mp4" media="(min-width: 1025px)"/>
         Your browser does not support the video tag.
       </video>
 
